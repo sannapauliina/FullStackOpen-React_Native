@@ -10,14 +10,20 @@
     "react-native": "0.86.2"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/react": "~19.2.2",
-    "typescript": "~6.0.3"
+    "eslint": "^10.8.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^17.9.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.66.0"
   },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint ."
   },
   "private": true
 }
