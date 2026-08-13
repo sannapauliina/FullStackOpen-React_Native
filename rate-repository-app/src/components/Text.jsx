@@ -1,9 +1,11 @@
 import { Text as NativeText, StyleSheet } from "react-native";
+import theme from "../theme";
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 14,
-    color: "#000",
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.textPrimary,
+    fontFamily: theme.fonts.main,
   },
 });
 
