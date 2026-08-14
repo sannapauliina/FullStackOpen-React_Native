@@ -6,19 +6,26 @@ import AppBar from "./src/components/AppBar";
 import RepositoryList from "./src/components/RepositoryList";
 import SignIn from "./src/components/SignIn";
 
+import { ApolloProvider } from "@apollo/client/react";
+import createApolloClient from "./src/utils/apolloClient";
+
+const apolloClient = createApolloClient();
+
 export default function App() {
   return (
-    <NativeRouter>
-      <View style={{ flex: 1, backgroundColor: "#e1e4e8" }}>
-        <AppBar />
+    <ApolloProvider client={apolloClient}>
+      <NativeRouter>
+        <View style={{ flex: 1, backgroundColor: "#e1e4e8" }}>
+          <AppBar />
 
-        <Routes>
-          <Route path="/" element={<RepositoryList />} />
-          <Route path="/signin" element={<SignIn />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<RepositoryList />} />
+            <Route path="/signin" element={<SignIn />} />
+          </Routes>
 
-        <StatusBar style="auto" />
-      </View>
-    </NativeRouter>
+          <StatusBar style="auto" />
+        </View>
+      </NativeRouter>
+    </ApolloProvider>
   );
 }
