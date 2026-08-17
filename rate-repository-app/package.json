@@ -10,7 +10,9 @@
     "formik": "^2.4.9",
     "graphql": "^16.14.2",
     "react": "19.2.3",
+    "react-dom": "^19.2.3",
     "react-native": "0.86.2",
+    "react-native-web": "^0.21.2",
     "react-router-native": "^6.30.4",
     "rxjs": "^7.8.2",
     "yup": "^1.7.1"
