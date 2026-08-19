@@ -3,6 +3,9 @@ import Constants from "expo-constants";
 import { Link } from "react-router-native";
 import Text from "./Text";
 
+import { useQuery } from "@apollo/client";
+import { ME } from "../graphql/queries";
+
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
@@ -21,6 +24,9 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+  const { data } = useQuery(ME);
+  const user = data?.me;
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -34,11 +40,19 @@ const AppBar = () => {
           </Link>
         </Pressable>
 
-        <Pressable>
-          <Link to="/signin">
-            <Text style={styles.tab}>Sign in</Text>
-          </Link>
-        </Pressable>
+        {user ? (
+          <Pressable>
+            <Link to="/signout">
+              <Text style={styles.tab}>Sign out</Text>
+            </Link>
+          </Pressable>
+        ) : (
+          <Pressable>
+            <Link to="/signin">
+              <Text style={styles.tab}>Sign in</Text>
+            </Link>
+          </Pressable>
+        )}
       </ScrollView>
     </View>
   );

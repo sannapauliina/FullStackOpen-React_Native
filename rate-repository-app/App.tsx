@@ -5,6 +5,7 @@ import { NativeRouter, Routes, Route } from "react-router-native";
 import AppBar from "./src/components/AppBar";
 import RepositoryList from "./src/components/RepositoryList";
 import SignIn from "./src/components/SignIn";
+import SignOut from "./src/components/SignOut";
 
 import { ApolloProvider } from "@apollo/client/react";
 import createApolloClient from "./src/utils/apolloClient";
@@ -21,6 +22,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<RepositoryList />} />
             <Route path="/signin" element={<SignIn />} />
+            <Route path="/signout" element={<SignOut />} />
           </Routes>
 
           <StatusBar style="auto" />
