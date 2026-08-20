@@ -19,10 +19,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@react-native/jest-preset": "^0.86.2",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
     "@types/react": "~19.2.2",
     "eslint": "^10.8.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^17.9.0",
+    "jest": "^30.4.2",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.66.0"
   },
@@ -31,7 +35,15 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "@react-native/jest-preset",
+    "resetMocks": false,
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ]
   },
   "private": true
 }
