@@ -4,7 +4,7 @@ import { GET_REPOSITORY } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
 import { View, Pressable, StyleSheet } from "react-native";
 import Text from "./Text";
-import * as Linking from "expo-linking";
+import * as Linking from "expo";
 
 const styles = StyleSheet.create({
   button: {
