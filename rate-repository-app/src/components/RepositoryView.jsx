@@ -2,24 +2,17 @@ import { useParams } from "react-router-native";
 import { useQuery } from "@apollo/client";
 import { GET_REPOSITORY } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
-import { View, Pressable, StyleSheet } from "react-native";
+import ReviewItem from "./ReviewItem";
+import { FlatList, View, StyleSheet } from "react-native";
 import Text from "./Text";
-import * as Linking from "expo";
 
 const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#0366d6",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    margin: 15,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 16,
+  separator: {
+    height: 10,
   },
 });
+
+const ItemSeparator = () => <View style={styles.separator} />;
 
 const RepositoryView = () => {
   const { id } = useParams();
@@ -30,18 +23,18 @@ const RepositoryView = () => {
   if (loading) return <Text>Loading...</Text>;
 
   const repository = data.repository;
+  const reviews = repository.reviews.edges.map((edge) => edge.node);
 
   return (
-    <View>
-      <RepositoryItem item={repository} showGithubButton />
-
-      <Pressable
-        style={styles.button}
-        onPress={() => Linking.openURL(repository.url)}
-      >
-        <Text style={styles.buttonText}>Open in GitHub</Text>
-      </Pressable>
-    </View>
+    <FlatList
+      data={reviews}
+      renderItem={({ item }) => <ReviewItem review={item} />}
+      keyExtractor={({ id }) => id}
+      ItemSeparatorComponent={ItemSeparator}
+      ListHeaderComponent={() => (
+        <RepositoryItem item={repository} showGithubButton />
+      )}
+    />
   );
 };
 
