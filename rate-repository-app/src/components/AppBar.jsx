@@ -40,6 +40,14 @@ const AppBar = () => {
           </Link>
         </Pressable>
 
+        {user && (
+          <Pressable>
+            <Link to="/create-review">
+              <Text style={styles.tab}>Create a review</Text>
+            </Link>
+          </Pressable>
+        )}
+
         {user ? (
           <Pressable>
             <Link to="/signout">

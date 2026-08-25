@@ -7,6 +7,7 @@ import RepositoryList from "./src/components/RepositoryList";
 import SignIn from "./src/components/SignIn";
 import SignOut from "./src/components/SignOut";
 import RepositoryView from "./src/components/RepositoryView";
+import CreateReview from "./src/components/CreateReview";
 
 import { ApolloProvider } from "@apollo/client/react";
 import createApolloClient from "./src/utils/apolloClient";
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signout" element={<SignOut />} />
             <Route path="/repository/:id" element={<RepositoryView />} />
+            <Route path="/create-review" element={<CreateReview />} />
           </Routes>
 
           <StatusBar style="auto" />
