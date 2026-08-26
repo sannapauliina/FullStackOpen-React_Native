@@ -48,6 +48,14 @@ const AppBar = () => {
           </Pressable>
         )}
 
+        {!user && (
+          <Pressable>
+            <Link to="/signup">
+              <Text style={styles.tab}>Sign up</Text>
+            </Link>
+          </Pressable>
+        )}
+
         {user ? (
           <Pressable>
             <Link to="/signout">
