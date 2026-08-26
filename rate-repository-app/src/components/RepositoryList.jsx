@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { FlatList, View, StyleSheet, Pressable, Text } from "react-native";
+import { useState, useEffect } from "react";
+import {
+  FlatList,
+  View,
+  StyleSheet,
+  Pressable,
+  Text,
+  TextInput,
+} from "react-native";
 import { useNavigate } from "react-router-native";
 import RepositoryItem from "./RepositoryItem";
 import useRepositories from "../hooks/useRepositories";
@@ -16,6 +23,13 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 16,
     fontWeight: "bold",
+  },
+  searchInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
   },
 });
 
@@ -41,9 +55,33 @@ const OrderSelector = ({ order, setOrder }) => {
   );
 };
 
+const SearchBar = ({ searchKeyword, setSearchKeyword }) => {
+  return (
+    <View style={styles.header}>
+      <TextInput
+        style={styles.searchInput}
+        placeholder="Search repositories..."
+        value={searchKeyword}
+        onChangeText={setSearchKeyword}
+      />
+    </View>
+  );
+};
+
 const RepositoryList = () => {
   const [order, setOrder] = useState("latest");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [debouncedKeyword, setDebouncedKeyword] = useState("");
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedKeyword(searchKeyword);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [searchKeyword]);
 
   let orderBy = "CREATED_AT";
   let orderDirection = "DESC";
@@ -61,6 +99,7 @@ const RepositoryList = () => {
   const { repositories } = useRepositories({
     orderBy,
     orderDirection,
+    searchKeyword: debouncedKeyword,
   });
 
   return (
@@ -73,7 +112,15 @@ const RepositoryList = () => {
         </Pressable>
       )}
       keyExtractor={(item) => item.id}
-      ListHeaderComponent={<OrderSelector order={order} setOrder={setOrder} />}
+      ListHeaderComponent={
+        <>
+          <SearchBar
+            searchKeyword={searchKeyword}
+            setSearchKeyword={setSearchKeyword}
+          />
+          <OrderSelector order={order} setOrder={setOrder} />
+        </>
+      }
     />
   );
 };
