@@ -6,4 +6,4 @@ Tämä on Full Stack Open React Native -kurssin lopullinen sovellus.
 
 Alla QR-koodi, jolla sovellus voidaan avata Expo Go -sovelluksessa tai emulaattorissa:
 
-![QR Code](./qr-code.png)
+![QR Code](./rate-repository-app/qr-code.png)
